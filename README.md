@@ -2,8 +2,6 @@
 
 ![GitHub](https://img.shields.io/github/license/Lete114/copy-object-path)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/Lete114/copy-object-path)
-![Visual Studio Marketplace Version](https://vsmarketplacebadge.apphb.com/version/Lete114.copy-object-path.svg)
-![Visual Studio Marketplace Installs](https://vsmarketplacebadge.apphb.com/installs/Lete114.copy-object-path.svg)
 
 ## Description
 

@@ -1,6 +1,7 @@
 {
   "name": "copy-objcet-path",
   "displayName": "Copy Objcet Path",
+  "publisher": "Lete114",
   "description": "Copy JavasSript Object Path",
   "version": "0.0.1",
   "engines": {
@@ -23,10 +24,6 @@
     },
     "commands": [
       {
-        "command": "copy-objcet-path.helloWorld",
-        "title": "Hello World"
-      },
-      {
         "command": "copy-objcet-path.copyObjectPath",
         "title": "Copy Object Path"
       }
@@ -36,6 +33,11 @@
     "lint": "eslint .",
     "pretest": "pnpm run lint",
     "test": "vscode-test"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lete114/copy-object-path"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.6",
@@ -48,7 +50,6 @@
   },
   "dependencies": {
     "@babel/parser": "^7.24.1",
-    "@babel/traverse": "^7.24.1",
-    "esprima": "^4.0.1"
+    "@babel/traverse": "^7.24.1"
   }
 }
