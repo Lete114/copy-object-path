@@ -1,0 +1,54 @@
+{
+  "name": "copy-objcet-path",
+  "displayName": "Copy Objcet Path",
+  "description": "Copy JavasSript Object Path",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.87.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./src/extension.js",
+  "contributes": {
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorFocus",
+          "command": "copy-objcet-path.copyObjectPath",
+          "group": "navigation"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "copy-objcet-path.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "copy-objcet-path.copyObjectPath",
+        "title": "Copy Object Path"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "pnpm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.87.0",
+    "@vscode/test-cli": "^0.0.6",
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.24.1",
+    "@babel/traverse": "^7.24.1",
+    "esprima": "^4.0.1"
+  }
+}

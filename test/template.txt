@@ -1,0 +1,25 @@
+~(() => {
+  const test_obj = {
+    a: {
+      b: { c: 'c value', d: 'd value', e: 'e value' },
+      bb: {
+        cc: 'cc value',
+        dd: 'dd value',
+        [Symbol('key')]: 'Symbol',
+        fun() {}
+      }
+    }
+  }
+})()
+const test_fun = reactive({ name: 'Alice', age: 30 })
+const test_proxy = new Proxy(
+  {
+    name: 'Alice',
+    age: 30
+  },
+  {
+    get: function (target, prop, receiver) {
+      return target[prop]
+    }
+  }
+)
