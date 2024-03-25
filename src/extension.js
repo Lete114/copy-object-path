@@ -37,7 +37,7 @@ function copyObjectPath() {
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-  const command = 'copy-objcet-path.copyObjectPath'
+  const command = 'copy-object-path.copyObjectPath'
   let disposable = vscode.commands.registerCommand(command, copyObjectPath)
   context.subscriptions.push(disposable)
 }

@@ -1,6 +1,6 @@
 {
-  "name": "copy-objcet-path",
-  "displayName": "Copy Objcet Path",
+  "name": "copy-object-path",
+  "displayName": "Copy Object Path",
   "publisher": "Lete114",
   "description": "Copy JavasSript Object Path",
   "version": "0.0.1",
@@ -17,14 +17,14 @@
       "editor/context": [
         {
           "when": "editorFocus",
-          "command": "copy-objcet-path.copyObjectPath",
+          "command": "copy-object-path.copyObjectPath",
           "group": "navigation"
         }
       ]
     },
     "commands": [
       {
-        "command": "copy-objcet-path.copyObjectPath",
+        "command": "copy-object-path.copyObjectPath",
         "title": "Copy Object Path"
       }
     ]
