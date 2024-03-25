@@ -5,6 +5,7 @@ const traverse = require('@babel/traverse').default
 function getPath(path) {
   const OP = 'ObjectProperty'
   const OE = 'ObjectExpression'
+  const AE = 'ArrayExpression'
   const VD = 'VariableDeclarator'
   const NE = 'NewExpression'
   const CE = 'CallExpression'
@@ -13,6 +14,13 @@ function getPath(path) {
     return getPath(path.parentPath)
   }
   if (path.type === OE && path.parent.type === OP) {
+    return getPath(path.parentPath) + '.' + path.parent.key.name
+  }
+  // Array index
+  if (path.type === OE && path.parent.type === AE) {
+    return `${getPath(path.parentPath)}[${path.key}]`
+  }
+  if (path.type === AE && path.parent.type === OP) {
     return getPath(path.parentPath) + '.' + path.parent.key.name
   }
 
@@ -65,7 +73,7 @@ function getPath(path) {
  * @returns
  */
 module.exports = function getObjectPath(code, row, column) {
-  const ast = parser.parse(code)
+  const ast = parser.parse(code, { sourceType: 'module' })
 
   let path = ''
   // @ts-ignore
@@ -77,6 +85,11 @@ module.exports = function getObjectPath(code, row, column) {
         (node.loc.start.column <= column && node.loc.end.column >= column)
 
       if (isNodeValid && isColumnInRange) {
+        if (node.type === 'Identifier') {
+          // @ts-ignore
+          path = getPath(parentPath) + '.' + node.name
+        }
+
         // @ts-ignore
         if (node.key && node.key.type === 'Identifier') {
           // @ts-ignore

@@ -5,9 +5,9 @@ const getObjectPath = require('./utils/getObjectPath')
 function copyObjectPath() {
   try {
     const editor = vscode.window.activeTextEditor
-    const text = editor.document.getText()
     if (!editor) return
 
+    const text = editor.document.getText()
     const selection = editor.selection
     const position = selection.active
 
@@ -16,7 +16,27 @@ function copyObjectPath() {
       column: position.character + 1
     }
 
-    const objectPath = getObjectPath(text, row, column)
+    const languageId = editor.document.languageId;
+
+    const languages = {
+      typescript() { },
+      vue() {
+        const scriptRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/gm;
+        const match = scriptRegex.exec(text)
+        if (!match) return
+
+        const scriptContent = match[1].trim();
+        const lineNumber = (text.substring(0, match.index).match(/\n/g) || []).length + 1;
+        const line = '\n'.repeat(lineNumber)
+        
+        const code = line + scriptContent
+        return code
+      }
+    }
+
+    const code = (languages[languageId] && languages[languageId]()) || text
+
+    const objectPath = getObjectPath(code, row, column)
 
     if (objectPath) {
       vscode.env.clipboard.writeText(objectPath)
@@ -27,7 +47,7 @@ function copyObjectPath() {
     }
   } catch (error) {
     /* eslint-disable */
-    console.error('No property selected.',error)
+    console.error('No property selected.', error)
     vscode.window.showErrorMessage('No property selected.')
     /* eslint-enable */
   }
@@ -42,7 +62,7 @@ function activate(context) {
   context.subscriptions.push(disposable)
 }
 
-function deactivate() {}
+function deactivate() { }
 
 module.exports = {
   activate,
