@@ -3,7 +3,7 @@
   "displayName": "Copy Object Path",
   "publisher": "Lete114",
   "description": "Copy JavasSript Object Path",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.87.0"
   },
