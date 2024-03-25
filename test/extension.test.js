@@ -22,11 +22,11 @@ suite('getObjectPath', () => {
     }
     {
       const res = 'test_obj.a.bb'
-      assert.strictEqual(res, getObjectPath(code, 8))
+      assert.strictEqual(res, getObjectPath(code, 8,20))
     }
     {
       const res = 'test_obj.a.bb.fun'
-      assert.strictEqual(res, getObjectPath(code, 9))
+      assert.strictEqual(res, getObjectPath(code, 9,10))
     }
   })
   test('function test', () => {
@@ -46,7 +46,7 @@ suite('getObjectPath', () => {
     }
     {
       const res = 'test_proxy.get'
-      assert.strictEqual(res, getObjectPath(code, 21))
+      assert.strictEqual(res, getObjectPath(code, 21, 7))
     }
   })
 })

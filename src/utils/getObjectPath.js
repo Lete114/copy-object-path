@@ -70,10 +70,14 @@ function getPath(path) {
  * @param { string } code
  * @param { number } row
  * @param { number= } column
+ * @param { boolean= } isFinally
  * @returns
  */
-module.exports = function getObjectPath(code, row, column) {
-  const ast = parser.parse(code, { sourceType: 'module' })
+module.exports = function getObjectPath(code, row, column, isFinally) {
+  const ast = parser.parse(code, {
+    sourceType: 'module',
+    plugins: ['typescript']
+  })
 
   let path = ''
   // @ts-ignore
@@ -85,7 +89,7 @@ module.exports = function getObjectPath(code, row, column) {
         (node.loc.start.column <= column && node.loc.end.column >= column)
 
       if (isNodeValid && isColumnInRange) {
-        if (node.type === 'Identifier') {
+        if (node.type === 'Identifier' && parentPath.type !== 'ObjectMethod') {
           // @ts-ignore
           path = getPath(parentPath) + '.' + node.name
         }
@@ -111,5 +115,9 @@ module.exports = function getObjectPath(code, row, column) {
       }
     }
   })
-  return path
+  // Whether or not to end it directly
+  if (isFinally) return path
+  // If the path cannot be found using both rows and columns
+  // cancel the columns and use only the rows to find it
+  return path || getObjectPath(code, row, void 0, true)
 }

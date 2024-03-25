@@ -16,19 +16,19 @@ function copyObjectPath() {
       column: position.character + 1
     }
 
-    const languageId = editor.document.languageId;
+    const languageId = editor.document.languageId
 
     const languages = {
-      typescript() { },
       vue() {
-        const scriptRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/gm;
+        const scriptRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/gm
         const match = scriptRegex.exec(text)
         if (!match) return
 
-        const scriptContent = match[1].trim();
-        const lineNumber = (text.substring(0, match.index).match(/\n/g) || []).length + 1;
+        const scriptContent = match[1].trim()
+        const lineNumber =
+          (text.substring(0, match.index).match(/\n/g) || []).length + 1
         const line = '\n'.repeat(lineNumber)
-        
+
         const code = line + scriptContent
         return code
       }
@@ -62,7 +62,7 @@ function activate(context) {
   context.subscriptions.push(disposable)
 }
 
-function deactivate() { }
+function deactivate() {}
 
 module.exports = {
   activate,
