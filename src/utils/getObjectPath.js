@@ -9,6 +9,7 @@ function getPath(path) {
   const VD = 'VariableDeclarator'
   const NE = 'NewExpression'
   const CE = 'CallExpression'
+  const TSAE = 'TSAsExpression'
 
   if (path.type === OP && path.parent.type === OE) {
     return getPath(path.parentPath)
@@ -61,6 +62,23 @@ function getPath(path) {
     return getPath(path.parentPath)
   }
   if (path.type === CE && path.parent.type === VD) {
+    return path.parent.id.name
+  }
+  
+  // TypeScript: as const
+  /* example
+  const ABC = {
+    a: {
+        b: {
+            c: 1
+        }
+      }
+  } as const
+  */
+  if (path.type === OE && path.parent.type === TSAE) {
+    return getPath(path.parentPath)
+  }
+  if (path.type === TSAE && path.parent.type === VD) {
     return path.parent.id.name
   }
 }
