@@ -64,7 +64,7 @@ function getPath(path) {
   if (path.type === CE && path.parent.type === VD) {
     return path.parent.id.name
   }
-  
+
   // TypeScript: as const
   /* example
   const ABC = {
